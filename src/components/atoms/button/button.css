@@ -1,0 +1,30 @@
+.button {
+    display: flex;
+}
+
+.button button {
+    padding: 2vh;
+    margin-right: 2vh;
+    color: white;
+    font-size: large;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 1.5vh;
+}
+
+.button-fetch {
+    background-color: #fea500;
+}
+
+.button-fetch:hover {
+    background-color: #fdc762;
+}
+
+.button-save {
+    background-color: #fe5d00;
+}
+
+.button-save:hover {
+    background-color: #fc9051;
+}

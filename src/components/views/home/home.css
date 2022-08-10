@@ -1,0 +1,9 @@
+.home {
+    margin: 10vh 20vw;
+}
+
+@media only screen and (max-width: 600px) {
+    .home {
+        margin: 3vh;
+    }
+}

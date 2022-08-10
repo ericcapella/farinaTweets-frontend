@@ -1,0 +1,13 @@
+.page {
+    margin: 10vh 20vw;
+}
+
+.page a {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .page {
+        margin: 3vh;
+    }
+}

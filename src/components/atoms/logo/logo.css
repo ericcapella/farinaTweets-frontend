@@ -1,0 +1,27 @@
+.logo {
+    display: flex;
+    cursor: pointer;
+}
+
+.logo img {
+    height: 8vh;
+}
+
+.logo p {
+    color: #fea500;
+    font-size: 40px;
+    margin-top: 0.5em;
+    margin-left: 0.3em;
+    text-decoration: none;
+}
+
+.logo-text strong {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo p {
+        font-size: 30px;
+        margin-top: 0.6em;
+    }
+}

@@ -1,0 +1,82 @@
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title button {
+    padding: 1vh;
+    margin-right: 2vh;
+    margin-top: 2vh;
+    color: white;
+    font-size: large;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 1.5vh;
+    background-color: rgb(199, 199, 199);
+}
+
+.tweet-box {
+    border-radius: 12px;
+    padding: 1.4vh 2vw;
+    margin: 1.5vh 0vw;
+    border: 1px solid lightgray;
+}
+
+.tweet-box:hover {
+    background-color: #f7f9f9;
+}
+
+.tweets a {
+    text-decoration: none;
+    color: black;
+}
+
+.user {
+    display: flex;
+}
+
+.user p {
+    margin-right: 10px;
+}
+
+.user-image {
+    border-radius: 50%;
+    height: 65px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.user-info {
+}
+
+.name-username {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: -20px;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-username {
+    color: darkgray;
+}
+
+.user-metrics {
+    display: flex;
+    text-align: end;
+    margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .name-username {
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    .view-selector {
+        margin-top: 2vh;
+    }
+}
