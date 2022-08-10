@@ -26,7 +26,7 @@
 export const getParsedTweets = (source) => {
     let BACKEND =
         window.location.hostname === "farinatweets.vercel.app"
-            ? "https://farinatweets.herokuapp.com/"
+            ? "https://farinatweets.herokuapp.com"
             : "http://localhost:3001"
 
     if (source === "twitter") {
