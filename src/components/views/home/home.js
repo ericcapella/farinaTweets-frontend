@@ -9,8 +9,6 @@ const Home = () => {
 
     const [searchTweets, setSearchTweets] = useState(false)
 
-    console.log("tweets en home", tweets)
-
     return (
         <div className="home">
             <Logo></Logo>
