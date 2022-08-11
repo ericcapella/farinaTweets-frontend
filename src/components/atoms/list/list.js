@@ -59,10 +59,47 @@ const List = ({ tweets, setTweets, searchTweets }) => {
                                                                 .username
                                                         }{" "}
                                                         retweeted a tweet
+                                                    </p>{" "}
+                                                    <p className="date-rt">
+                                                        {
+                                                            eachTweet.created_at
+                                                                .split("-")[2]
+                                                                .split("T")[0]
+                                                        }
+                                                        /
+                                                        {
+                                                            eachTweet.created_at.split(
+                                                                "-"
+                                                            )[1]
+                                                        }
+                                                        /
+                                                        {
+                                                            eachTweet.created_at.split(
+                                                                "-"
+                                                            )[0]
+                                                        }
                                                     </p>
                                                 </div>
                                             ) : (
-                                                ""
+                                                <p className="date-no-rt">
+                                                    {
+                                                        eachTweet.created_at
+                                                            .split("-")[2]
+                                                            .split("T")[0]
+                                                    }
+                                                    /
+                                                    {
+                                                        eachTweet.created_at.split(
+                                                            "-"
+                                                        )[1]
+                                                    }
+                                                    /
+                                                    {
+                                                        eachTweet.created_at.split(
+                                                            "-"
+                                                        )[0]
+                                                    }
+                                                </p>
                                             )}
                                             <div className="user">
                                                 <img
@@ -110,7 +147,9 @@ const List = ({ tweets, setTweets, searchTweets }) => {
                                                 </div>
                                             </div>
 
-                                            <p>{eachTweet.text}</p>
+                                            <p className="tweet-text">
+                                                {eachTweet.text}
+                                            </p>
                                         </div>
                                     </a>
                                 )
@@ -119,7 +158,7 @@ const List = ({ tweets, setTweets, searchTweets }) => {
                     ) : (
                         <div>
                             {/* Inicio tabla */}
-                            <div>
+                            <div className="table">
                                 <table>
                                     <thead>
                                         <tr>
@@ -136,6 +175,7 @@ const List = ({ tweets, setTweets, searchTweets }) => {
                                                         {eachTweet.author.name}
                                                     </td>
                                                     <td>
+                                                        @
                                                         {
                                                             eachTweet.author
                                                                 .username
@@ -153,7 +193,50 @@ const List = ({ tweets, setTweets, searchTweets }) => {
                     )}
                 </>
             ) : (
-                <h1>Dale a buscar bro</h1>
+                <div className="prior-to-click">
+                    <div className="below-button">
+                        <img src="https://farmaleaderstalento.com/wp-content/uploads/2021/05/flecha.gif"></img>
+                        <h1>¡Haz clic en buscar!</h1>
+                    </div>
+                    <div className="additional-info">
+                        <p>
+                            <br />
+                            Hola,
+                            <br /> Farina Tweets es una aplicación web que te
+                            permite ver y analizar los últimos 100 tweets con el
+                            hastag{" "}
+                            <a
+                                href="https://twitter.com/search?q=%23farina"
+                                target="_blank"
+                            >
+                                #farina
+                            </a>{" "}
+                            de esta semana. <br />
+                            Puedes empezar haciendo clic en el botón de arriba.
+                            😎👍 <br />
+                            Esta app es de código abierto y se pueden ver los
+                            repositorios en GitHub:
+                        </p>
+                        <ul>
+                            <li>
+                                <a
+                                    href="https://github.com/ericcapella/farinaTweets-frontend"
+                                    target="_blank"
+                                >
+                                    Frontend
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/ericcapella/farinaTweets-backend"
+                                    target="_blank"
+                                >
+                                    Backend
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             )}
         </div>
     )

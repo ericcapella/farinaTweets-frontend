@@ -6,8 +6,35 @@
     text-decoration: none;
 }
 
+.charts-layout {
+    max-width: 100%;
+}
+
+.title-graphs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-graphs button {
+    padding: 1vh;
+    margin-right: 2vh;
+    margin-top: 2vh;
+    color: white;
+    font-size: large;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 1.5vh;
+    background-color: rgb(199, 199, 199);
+}
+
 @media only screen and (max-width: 600px) {
     .page {
         margin: 3vh;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
     }
 }

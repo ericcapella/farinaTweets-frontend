@@ -12,6 +12,7 @@ import {
     Pie,
     Cell,
     Legend,
+    ResponsiveContainer,
 } from "recharts"
 import { Link } from "react-router-dom"
 import Logo from "../../atoms/logo/logo"
@@ -24,12 +25,14 @@ const Graphs = () => {
 
     const [dataG1, setDataG1] = useState([])
     const [dataG2, setDataG2] = useState([])
+    const [dataG3, setDataG3] = useState([])
 
     const loadTweets = () => {
         getParsedTweets().then((tweets) => {
             setDbTweets(tweets)
             getDataForG1(tweets)
             getDataForG2(tweets)
+            getDataForG3(tweets)
         })
     }
 
@@ -50,8 +53,8 @@ const Graphs = () => {
             if (followers < leastFollowers) {
                 leastFollowers = followers
             }
-            return tweet.created_at.split("T")[1].split(":")[0] + " H"
-            // return tweet.created_at.split('T')[0]
+            return tweet.created_at.split("T")[1].split(":")[0] + " h"
+            // return tweet.created_at.split("T")[0]
         })
 
         console.log({
@@ -70,12 +73,36 @@ const Graphs = () => {
                 obj[date] = 1
             }
         })
+
         //Lo pasamos de obj a array y después con el map de array de arrays a array de objetos
         const deObjaArray = Object.entries(obj).map(([key, value]) => {
             return { date: key, tweets: value }
         })
+
         //Ordena para que la fecha más antigua sea la primera
         setDataG1(deObjaArray.sort((a, b) => (a.date > b.date ? 1 : -1)))
+    }
+
+    const getDataForG3 = (tweets) => {
+        const splitTimeG3 = tweets.map((tweet) => {
+            // return tweet.created_at.split("T")[1].split(":")[0] + " H"
+            return tweet.created_at.split("T")[0]
+        })
+
+        let obj3 = {}
+        splitTimeG3.forEach((date) => {
+            if (obj3[date]) {
+                obj3[date]++
+            } else {
+                obj3[date] = 1
+            }
+        })
+
+        const deObjaArray3 = Object.entries(obj3).map(([key, value]) => {
+            return { date: key, tweets: value }
+        })
+
+        setDataG3(deObjaArray3.sort((a, b) => (a.date > b.date ? 1 : -1)))
     }
 
     const getDataForG2 = (tweets) => {
@@ -107,53 +134,75 @@ const Graphs = () => {
         loadTweets()
     }, [])
 
-    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+    const COLORS = ["#fe5d00", "#fea500"]
 
     return (
         <div className="page">
             <Link to="/">
                 <Logo></Logo>
             </Link>
-            <p>Graphs</p>
-            {/* Graph 1 */}
-            <p>Tweets diarios</p>
-            <BarChart width={1000} height={400} data={dataG1}>
-                <Bar type="monotone" dataKey="tweets" fill="#fea500" />
-                <Tooltip />
-                <XAxis dataKey="date" />
-                <YAxis />
-            </BarChart>
-
-            {/* Graph 2 */}
-            <p>Número de RT y tweets normales</p>
-            <PieChart width={1000} height={500}>
-                <Pie
-                    data={dataG2}
-                    labelLine={false}
-                    outerRadius={200}
-                    fill="#8884d8"
-                    dataKey="ammount"
-                >
-                    {dataG2.map((entry, index) => (
-                        <Cell
-                            key={`cell-${index}`}
-                            fill={COLORS[index % COLORS.length]}
+            <div className="title-graphs">
+                <div>
+                    <h1>Gráficos de análisis de los tweets de #farina</h1>
+                </div>
+                <div>
+                    <Link to="/">
+                        <button>Volver al inicio</button>
+                    </Link>
+                </div>
+            </div>
+            <div className="charts-layout">
+                <br />
+                {/* Graph 1 */}
+                <h3>Tweets según la hora del día</h3>
+                <ResponsiveContainer width="100%" height={400}>
+                    <LineChart data={dataG1}>
+                        <Line
+                            type="monotone"
+                            dataKey="tweets"
+                            stroke="#fea500"
                         />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
-
-            {/* Graph 3 */}
-            <p>Followers de los usuarios que tweetean </p>
-            <LineChart width={1000} height={400} data={dataG1}>
-                <Line type="monotone" dataKey="tweets" stroke="#fea500" />
-                <Tooltip />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <XAxis dataKey="name" />
-                <YAxis />
-            </LineChart>
+                        <Tooltip />
+                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                    </LineChart>
+                </ResponsiveContainer>
+                <br />
+                {/* Graph 3 */}
+                <h3>Tweets diarios</h3>
+                <ResponsiveContainer width="100%" height={400}>
+                    <BarChart data={dataG3}>
+                        <Bar type="monotone" dataKey="tweets" fill="#fea500" />
+                        <Tooltip />
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                    </BarChart>
+                </ResponsiveContainer>
+                <br />
+                {/* Graph 2 */}
+                <h3>Proporción de tweets y retweets</h3>
+                <ResponsiveContainer width="100%" height={600}>
+                    <PieChart>
+                        <Pie
+                            data={dataG2}
+                            labelLine={false}
+                            outerRadius="100%"
+                            fill="#8884d8"
+                            dataKey="ammount"
+                        >
+                            {dataG2.map((entry, index) => (
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={COLORS[index % COLORS.length]}
+                                />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     )
 }
